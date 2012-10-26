@@ -33,9 +33,12 @@ class ArrayStatic {
      * @param type $keys
      * @return type
      */
-    static function concatWs($glue, $array, $key /* , ... keys */) {
+    static function concatWs($glue, $array /* , ... keys */) {
         $args = array_slice(func_get_args(), 2);
-        $out = '';
+        if (!$args) {
+            $args = array_keys((array) $array);
+        }
+        $out = NULL;
         foreach ($args as $v) {
             if (isset($array[$v]) && $array[$v] !== NULL) {
                 if ($out) {
@@ -47,6 +50,11 @@ class ArrayStatic {
         return $out;
     }
 
+    /**
+     * unset keys from array
+     * @param array $array
+     * @param type $key
+     */
     static function kUnset(array &$array, $key /* , .. keys . */) {
         $args = array_slice(func_get_args(), 1);
         foreach ($args as $key) {
