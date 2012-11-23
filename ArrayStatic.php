@@ -56,10 +56,13 @@ class ArrayStatic {
      * @param type $key
      */
     static function kUnset(array &$array, $key /* , .. keys . */) {
+        $out = array();
         $args = array_slice(func_get_args(), 1);
         foreach ($args as $key) {
+            $out[$key] = $array[$key];
             unset($array[$key]);
         }
+        return $out;
     }
 
     /**
